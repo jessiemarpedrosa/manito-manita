@@ -7,6 +7,10 @@ body{
     background: #eee;
 }
 
+ol, ul{
+    padding: 10px 0 0px 20px;
+}
+
 #panel_container{
     background: white;
     border-color: #c6c6c6 !important;
@@ -24,6 +28,10 @@ transition: opacity .5s;
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
 opacity: 0;
 }
+
+.flip-list-move {
+    transition: transform 1s;
+}  
 
 @media (max-width: 767px) {
     .btn-xs-block {

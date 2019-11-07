@@ -48,7 +48,7 @@ if($action == 'create'){
     if($result){
         $res['message'] = "New group added succesfully!";
     } else{
-        $res['error'] = $result;
+        $res['error'] = true;
         $res['message'] = "Error: Could not add group or there might be some error.";
     }
 

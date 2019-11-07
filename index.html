@@ -26,6 +26,13 @@
                         {{ successMsg }}
                     </p>
                 </transition>
+                
+                <div class="p-3 mb-2 bg-danger text-white" v-if="errors.length">
+                    <b>Please correct the following error(s):</b>
+                    <transition-group name="flip-list" tag="ul">
+                        <li v-bind:key="error" v-for="error in errors">{{ error }}</li>
+                    </transition-group>
+                </div>
 
             </div>
         </div>
@@ -63,12 +70,12 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 
-                <form v-show="showCreateGroupPanel" @submit.prevent>
+                <form v-show="showCreateGroupPanel" v-on:submit="checkForm">
                     <h4 class="mb-4">Group Name : {{ newGroup.group_name }}</h4>      
                         
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
-                            <input type="text" class="form-control my-2" name="" id="groupName" v-model="newGroup.group_name" placeholder="Group name" required> 
+                            <input type="text" class="form-control my-2" name="" id="groupName" v-model="newGroup.group_name" placeholder="Group name"> 
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <vuejs-datepicker class="my-2 bg-white" :bootstrap-styling="true" name="" v-model="newGroup.exchange_gift_date" placeholder="Gift Exchange Date"></vuejs-datepicker> 
@@ -97,7 +104,7 @@
                     </div>
 
                     <div class="clearfix">&nbsp;</div>    
-                    <button @click="addGroup()" type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
                 
             </div>
