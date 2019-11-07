@@ -1,0 +1,27 @@
+{
+  "name": "manito-manita",
+  "version": "1.0.0",
+  "description": "Manito Manita Web App v1.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jessiemarpedrosa/manito-manita.git"
+  },
+  "keywords": [
+    "Manito",
+    "Manita"
+  ],
+  "author": "Jessiemar Pedrosa",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jessiemarpedrosa/manito-manita/issues"
+  },
+  "homepage": "https://github.com/jessiemarpedrosa/manito-manita#readme",
+  "dependencies": {
+    "mysql": "^2.17.1"
+  }
+}

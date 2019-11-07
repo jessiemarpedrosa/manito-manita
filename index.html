@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Manito-Manita Web App</title>
+</head>
+<body>
+
+<div id="app">
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="my-3 text-center">Manito-Manita v1.0</h1>
+                <p>Manito Manita is a term used in the Philippines for a Secret Santa exchanging of gifts which is usually performed during Christmas season among friends, relatives, or loved ones.</p>
+            
+                <transition name="fade">
+                    <p class="p-3 mb-2 bg-danger text-white" v-if="errorMsg">
+                        {{ errorMsg }}
+                    </p>
+                </transition>
+                <transition name="fade">
+                    <p class="p-3 mb-2 bg-success text-white" v-if="successMsg">
+                        {{ successMsg }}
+                    </p>
+                </transition>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12 mb-2 text-md-right">
+                <button v-on:click="adminLoginSeen" type="button" class="btn btn-primary btn-lg btn-xs-block">Admin Login</button>
+            </div>
+            <div class="col-sm-6 col-xs-12 mb-2">
+                <button v-on:click="createGroupSeen()" type="button" class="btn btn-primary btn-lg btn-xs-block">Create A Group</button>
+            </div>
+        </div>
+        <div class="clearfix">&nbsp;</div>
+        <div class="row">
+            <div id="panel_container" class="col border border-secondary rounded-lg p-4 mx-3">
+                
+                <form v-show="showAdminLoginPanel" @submit.prevent>
+                    <h4>Admin Login</h4>
+                    <div class="form-group">
+                        <label for="inputEmail">Email address :</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputPassword">Password :</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter password" autocomplete="off">
+                    </div>
+                    <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+
+                <form v-show="showCreateGroupPanel" @submit.prevent>
+                    <h4 class="mb-4">Group Name : {{ newGroup.group_name }}</h4>      
+                        
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <input type="text" class="form-control my-2" name="" id="groupName" v-model="newGroup.group_name" placeholder="Group name" required> 
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <vuejs-datepicker class="my-2 bg-white" :bootstrap-styling="true" name="" v-model="newGroup.exchange_gift_date" placeholder="Gift Exchange Date"></vuejs-datepicker> 
+                        </div>
+                    </div>   
+                    <div class="row">    
+                        <div class="col-xs-12 col-sm-6">
+                                <vuejs-datepicker class="my-2 bg-white" :bootstrap-styling="true" name="" v-model="newGroup.signup_deadline" placeholder="Signup Deadline"></vuejs-datepicker> 
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <input type="text" class="form-control my-2" name="" id="spending_minimum" v-model="newGroup.spending_minimum" placeholder="Spending Minimum"> 
+                        </div>
+                    </div>
+                    <div class="row">    
+                        <div class="col-xs-12 col-sm-6">
+                            <input type="text" class="form-control my-2" name="" id="your_name" v-model="newGroup.admin_name" placeholder="Your Name"> 
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <input type="email" class="form-control my-2" name="" id="your_email" v-model="newGroup.admin_email" placeholder="Your Email">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <input type="password" class="form-control my-2" name="" id="your_password" v-model="newGroup.admin_password" placeholder="Password" autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="clearfix">&nbsp;</div>    
+                    <button @click="addGroup()" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/vuejs-datepicker"></script>
+<script type="text/javascript" src="app.js"></script>
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="style.css">
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background: #eee;
+}
+
+#panel_container{
+    background: white;
+    border-color: #c6c6c6 !important;
+    box-shadow: 0 0 10px -5px #b9b9b9;
+    margin-bottom: 50px;
+}
+
+.bg-white input{
+    background: white !Important;
+}
+
+.fade-enter-active, .fade-leave-active {
+transition: opacity .5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+opacity: 0;
+}
+
+@media (max-width: 767px) {
+    .btn-xs-block {
+        display: flex;
+        width: 100%;
+    }
+    /*
+        Extra config:
+        .btn-xs-block .btn {
+            flex-grow: 1;
+        }
+    */
+    input[type="submit"].btn-xs-block,
+    input[type="reset"].btn-xs-block,
+    input[type="button"].btn-xs-block {
+        width: 100%;
+    }
+    .btn-block+.btn-xs-block,
+    .btn-xs-block+.btn-block,
+    .btn-xs-block+.btn-xs-block {
+        margin-top: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1{
+        font-size: 2em;
+    }
+}
