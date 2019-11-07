@@ -79,7 +79,7 @@
                                 <vuejs-datepicker class="my-2 bg-white" :bootstrap-styling="true" name="" v-model="newGroup.signup_deadline" placeholder="Signup Deadline"></vuejs-datepicker> 
                         </div>
                         <div class="col-xs-12 col-sm-6">
-                            <input type="text" class="form-control my-2" name="" id="spending_minimum" v-model="newGroup.spending_minimum" placeholder="Spending Minimum"> 
+                            <input type="number" class="form-control my-2" name="" id="spending_minimum" v-model="newGroup.spending_minimum" placeholder="Spending Minimum"> 
                         </div>
                     </div>
                     <div class="row">    
@@ -109,6 +109,7 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vuejs-datepicker"></script>
+<script src="https://momentjs.com/downloads/moment.js"></script>
 <script type="text/javascript" src="app.js"></script>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 

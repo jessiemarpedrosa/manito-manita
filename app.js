@@ -45,7 +45,6 @@ var app = new Vue({
         createGroupSeen: function(){
             this.showCreateGroupPanel = true;
             this.showAdminLoginPanel = false;
-            console.log(this.randGroupCode());
         },
         getAllGroup: function(){
             axios.get("api.php?action=read")
@@ -54,14 +53,15 @@ var app = new Vue({
             });
         },
         customFormatter(date) {
-            return moment(date).format('MMMM Do YYYY, h:mm:ss a');
+            return moment(date).format('MMMM Do YYYY');
         },
         addGroup: function(){   // Add new group to the database by calling our API, using axios
             app.newGroup.group_code = this.randGroupCode();
+            app.newGroup.exchange_gift_date = moment(app.newGroup.exchange_gift_date).format("YYYY-MM-DD");   
+            app.newGroup.signup_deadline = moment(app.newGroup.signup_deadline).format("YYYY-MM-DD");   
 
             console.log(app.newGroup);
 			var formData = app.toFormData(app.newGroup);
-            console.log("Form Data : " + formData);
 
 			axios.post("api.php?action=create", formData)
 			.then(function(response){
@@ -75,8 +75,7 @@ var app = new Vue({
                     app.getAllGroup();
                 }
 
-                setTimeout(()=>{ app.successMsg = ""; app.errorMsg = "" }, 4000);
-                
+                setTimeout(()=>{ app.successMsg = ""; app.errorMsg = "" }, 4000);        
 			});
         },
         toFormData: function(obj){
@@ -84,7 +83,6 @@ var app = new Vue({
             for ( var key in obj ) {
                 form_data.append(key, obj[key]);
             } 
-            console.log(form_data);
             return form_data;
         },
 		clearMessage: function(){
