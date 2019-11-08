@@ -15,7 +15,7 @@
             <div class="col">
                 <h1 class="my-3 text-center">Manito-Manita v1.0</h1>
                 <p>Manito Manita is a term used in the Philippines for a Secret Santa exchanging of gifts which is usually performed during Christmas season among friends, relatives, or loved ones.</p>
-            
+
                 <transition name="fade">
                     <p class="p-3 mb-2 bg-danger text-white" v-if="errorMsg">
                         {{ errorMsg }}
@@ -33,6 +33,8 @@
                         <li v-bind:key="error" v-for="error in errors">{{ error }}</li>
                     </transition-group>
                 </div>
+                
+                <div class="status text-center"><strong>{{ status }}</strong></div>
 
             </div>
         </div>
@@ -113,7 +115,7 @@
 </div>
 
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+<script type="text/javascript" src="vue.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js" integrity="sha256-S1J4GVHHDMiirir9qsXWc8ZWw74PHHafpsHp5PXtjTs=" crossorigin="anonymous"></script>
 <script src="https://unpkg.com/vuejs-datepicker"></script>
 <script src="https://momentjs.com/downloads/moment.js"></script>

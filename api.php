@@ -2,15 +2,17 @@
 $servername = "remotemysql.com";
 $username = "DNidXqyh7U";
 $password = "x2eR4raZGa";
-$dbname = "DNidXqyh7U";
+$dbname = "DNidXqyh7Uxxx";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+$res = array("error" => false);
+
 if($conn->connect_error){
+    $res['error'] = true;
+    $res['message'] = "Error: Could not connect to database!";
     die("Could not connect to database!");
 }
-
-$res = array("error" => false);
 
 $action = 'read';
 
@@ -27,7 +29,11 @@ if($action == 'read'){
         array_push($main_group, $row);
     }
 
+    // $count = $conn->query( "SELECT COUNT(admin_email) FROM `main_group` WHERE admin_email='masie@yahoo.com'" );
+    // array_push($main_group, mysqli_num_rows($count));
+
     $res['main_group'] = $main_group;
+
 }
 
 // Adding new group to the main_group table
@@ -41,16 +47,26 @@ if($action == 'create'){
     $admin_email = $_POST['admin_email'];
     $admin_password = $_POST['admin_password'];
 
-    $result = $conn->query("INSERT INTO `main_group` (group_code,group_name,exchange_gift_date,signup_deadline,spending_minimum,admin_name,admin_email,admin_password) 
-    VALUES 
-    ('$group_code', '$group_name', '$exchange_gift_date', '$signup_deadline', '$spending_minimum', '$admin_name', '$admin_email', '$admin_password')");
+    // Check admin_email if it already exists on the DB
+    // $sql = "SELECT (admin_email) FROM `main_group` WHERE admin_email = '$admin_email'";
+    // $result = mysql_result(mysql_query($sql),0);
 
-    if($result){
-        $res['message'] = "New group added succesfully!";
-    } else{
-        $res['error'] = true;
-        $res['message'] = "Error: Could not add group or there might be some error.";
-    }
+    // if( checkEmailIfExist($admin_email) ){
+    //     $res['error'] = true;
+    //     $res['message'] = "Error: Email already exist.";
+    // }
+    // else {
+        $result = $conn->query("INSERT INTO `main_group` (group_code,group_name,exchange_gift_date,signup_deadline,spending_minimum,admin_name,admin_email,admin_password) 
+        VALUES 
+        ('$group_code', '$group_name', '$exchange_gift_date', '$signup_deadline', '$spending_minimum', '$admin_name', '$admin_email', '$admin_password')");
+
+        if($result){
+            $res['message'] = "Group name " . $group_name . " added succesfully!";
+        } else{
+            $res['error'] = true;
+            $res['message'] = "Error: Could not create group or there might be some error.";
+        }
+    // }
 
 }
 
@@ -88,10 +104,20 @@ if($action == 'delete'){
 
 }
 
+function checkEmailIfExist($email){
+    // $sql = "SELECT admin_email FROM `main_group` WHERE admin_email='$email'" ;
+    $result = $conn->query( "SELECT COUNT(admin_email) FROM `main_group` WHERE admin_email='$email'" );
+
+    if( mysqli_num_rows( $result ) > 0 ){
+        return true;
+    }
+
+    return false;
+}
+
 
 $conn->close();
 
 header("Content-type: application/json");
-// $json = json_decode($res);
 echo json_encode($res, JSON_PRETTY_PRINT);
 die();

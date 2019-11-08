@@ -11,6 +11,8 @@ var app = new Vue({
         group_name: "",
         gift_exchange_date: "",
         currentDate: "",
+        status: "",
+        loaderImg: "assets/loader.gif",
         errors: [],
         userData: {
             email: "",
@@ -30,7 +32,6 @@ var app = new Vue({
     },
 
     mounted: function(){
-
         //currentDate = new Date().toJSON().slice(0,10).replace(/-/g,'-');
         currentDate = new Date();
     },
@@ -69,22 +70,26 @@ var app = new Vue({
 
             console.log(app.newGroup);
 			var formData = app.toFormData(app.newGroup);
+            this.status = "Loading...";
 
 			axios.post("api.php?action=create", formData)
 			.then(function(response){
 				
 				app.newGroup = { group_code: "", group_name: "", exchange_gift_date: "", signup_deadline: "", spending_minimum: "", admin_name: "", admin_email: "", admin_password: "" };
 
-                console.log(response.data.message);
-
 				if(response.data.error){
-					app.errorMsg = response.data.message; 
+                    app.errorMsg = response.data.message;
+                    app.status = "";
                 } else{
                     app.successMsg = response.data.message;
+                    app.status = "";
                     app.getAllGroup();
                 }
 
-                setTimeout(()=>{ app.successMsg = ""; app.errorMsg = "" }, 4000);        
+                console.log(response.data.message);
+                setTimeout(()=>{ app.successMsg = ""; app.errorMsg = "" }, 5000);       
+                this.status = "";
+
 			});
         },
         toFormData: function(obj){
@@ -108,7 +113,6 @@ var app = new Vue({
                 this.newGroup.signup_deadline = moment(this.newGroup.signup_deadline).format("YYYY-MM-DD");
 
                 console.log("Good to go!")
-              
                 app.addGroup();
             }
       
