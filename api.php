@@ -2,7 +2,7 @@
 $servername = "remotemysql.com";
 $username = "DNidXqyh7U";
 $password = "x2eR4raZGa";
-$dbname = "DNidXqyh7Uxxx";
+$dbname = "DNidXqyh7U";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 
@@ -119,5 +119,8 @@ function checkEmailIfExist($email){
 $conn->close();
 
 header("Content-type: application/json");
+header('Access-Control-Allow-Origin: *');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With,Content-Type, Accept");
+header('Access-Control-Allow-Methods: GET, POST, PUT');
 echo json_encode($res, JSON_PRETTY_PRINT);
 die();
